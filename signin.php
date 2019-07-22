@@ -79,6 +79,10 @@ include __DIR__ . '/nav.php'; ?>
         <div class="form-group text-center">
             <button type="submit" class="btn btn-success btn-lg">Login</button>
         </div>
+        <div class="input-group">
+                <a class="nav-link" href="/forgetpass.php">forget password</a>
+        </div>
+
 
         </form>
     </div>
