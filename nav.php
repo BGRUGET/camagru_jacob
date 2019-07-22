@@ -17,6 +17,9 @@ require_once ('header.php'); ?>
             <li class="nav-item">
                 <a class="nav-link" href="/cameraview.php">CAMERA</a>
             </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/profil.php">PROFIL</a>
+                </li>
             <li class="nav-item">
                 <a class="nav-link" href="/disconnect.php">DISCONNECT</a>
             </li>

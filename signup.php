@@ -1,13 +1,4 @@
 
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>camagru</title>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-<body>
 <?php
 require_once('header.php');
 require_once ('database.php');
@@ -18,17 +9,18 @@ if (get_user() == TRUE)
 <?php
     if (isset($_POST['login']))
         {
+
             $len_login=0;
             $login_existing = 0;
             $valid_mail = 0;
             $mail_existing = 0;
             $invalid_pass = 0;
             $valid_pass = 0;
-            $login= (htmlspecialchars(addslashes($_POST['login'])));
+            $login= (htmlspecialchars(addslashes($_POST['login']))); // html.. pas forcement obligatoire
             $mail= (htmlspecialchars(addslashes($_POST['email'])));
             $passe1= (htmlspecialchars(addslashes($_POST['passe'])));
             $passe2= (htmlspecialchars(addslashes($_POST['passe2'])));
-            if((strlen($login) < 3) || (strlen($login) > 12)) //LOGIN
+            if((strlen($login) < 3) || (strlen($login) > 12)) // check LOGIN
                 $len_login = 1;
             $log = $database->prepare("SELECT login FROM users WHERE login = ? ");
             $log->bindValue(1, $login);
@@ -36,15 +28,15 @@ if (get_user() == TRUE)
             $res_login = $log->fetch();
             if ($res_login[0] === $login)
                 $login_existing = 1; //ENDLOGIN
-            if (!(filter_var($mail, FILTER_VALIDATE_EMAIL)))
+            if (!(filter_var($mail, FILTER_VALIDATE_EMAIL))) // Check MAIL
                 $valid_mail=1;
             $log_mail = $database->prepare("SELECT mail FROM users WHERE mail =?");
             $log_mail->bindValue(1, $mail);
             $log_mail->execute();
             $new_mail = $log_mail->fetch();
             if($new_mail[0] === $mail)
-                $mail_existing = 1;
-            if ($passe1 != $passe2)
+                $mail_existing = 1; // ENDMAIL
+            if ($passe1 != $passe2) // CHECK pase
                 $valid_pass = 1;
             if ($passe1 == $passe2)
             {
@@ -54,13 +46,28 @@ if (get_user() == TRUE)
             }
             if ($len_login==0 && $login_existing == 0 && $valid_mail == 0 && $mail_existing == 0  && $invalid_pass == 0  && $valid_pass == 0)
             {
+
                 $cle = md5(microtime(TRUE)*1000000);
-                $sign_up = $database->prepare("INSERT INTO users VALUE('',?,?,?,?)");
+                $sign_up = $database->prepare("INSERT INTO users VALUE('',?,?,?,?,'0')");
                 $sign_up->bindValue(1, $login);
-                $sign_up->bindValue(2, $passe1);
-                $sign_up->bindValue(3, $mail);
+                $sign_up->bindValue(2, $mail);
+                $sign_up->bindValue(3, $passe1);
                 $sign_up->bindValue(4, $cle);
                 $sign_up->execute();
+                $to = $mail;
+                $subject = 'Check mail Camabelgruge';
+                $message = ' hello '.$login.',
+                            Thanks for signing up!
+                            Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
+                            ------------------------
+                            Username: '.$login.'
+                            ------------------------
+                             
+                            Please click this link to activate your account:
+                            http://'.$_SERVER['HTTP_HOST'].'/activateaccount.php?email='.$mail.'&hash='.$cle.'';
+
+                $headers = 'From:noreply@gmail.com' . "\r\n";
+                mail($to, $subject, $message, $headers);
             }
 
         }
