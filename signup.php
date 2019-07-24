@@ -1,16 +1,16 @@
 
 <?php
-require_once('header.php');
-require_once ('database.php');
-    include __DIR__ . '/nav.php';
+
+require_once('connexion_user.php');
 if (get_user() == TRUE)
-    header('Location: /cameraview.php');
+    header('Location: /index.php?p=camera');
 ?>
 <?php
-    if (isset($_POST['login']))
-        {
+    if(isset($_POST['login'])){
 
-            $len_login=0;
+        User::register($_POST['login'],$_POST['email'],$_POST['passe'],$_POST['passe2']);
+        }
+           $len_login=0;
             $login_existing = 0;
             $valid_mail = 0;
             $mail_existing = 0;
@@ -20,8 +20,7 @@ if (get_user() == TRUE)
             $mail= (htmlspecialchars(addslashes($_POST['email'])));
             $passe1= (htmlspecialchars(addslashes($_POST['passe'])));
             $passe2= (htmlspecialchars(addslashes($_POST['passe2'])));
-            if((strlen($login) < 3) || (strlen($login) > 12)) // check LOGIN
-                $len_login = 1;
+
             $log = $database->prepare("SELECT login FROM users WHERE login = ? ");
             $log->bindValue(1, $login);
             $log->execute();
@@ -70,7 +69,7 @@ if (get_user() == TRUE)
                 mail($to, $subject, $message, $headers);
             }
 
-        }
+        }*/
 ?>
 <div class="modal-dialog">
     <div class="modal-content">
@@ -85,7 +84,7 @@ if (get_user() == TRUE)
                     <span class="input-group-addon">
                     <span class="glyphicon glyphicon-user"></span>
                     </span>
-                        <input type="text" name="login" class="form-control" required placeholder="Login" />
+                        <input type="text" name="login" class="form-control" required placeholder="Login" pattern="[A-Za-z]{3,12}" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -93,7 +92,7 @@ if (get_user() == TRUE)
                     <span class="input-group-addon">
                     <span class="glyphicon glyphicon-user"></span>
                     </span>
-                        <input type="password" name="passe" class="form-control" required placeholder="Password" />
+                        <input type="password" name="pass" class="form-control" required placeholder="Password" pattern="/^(?=.*\d)(?=.*[A-Za-z])[0-9A-Za-z!@#$%]{5,20}$/" />
                     </div>
                 </div>
                 <div class="form-group">
@@ -101,7 +100,7 @@ if (get_user() == TRUE)
                     <span class="input-group-addon">
                     <span class="glyphicon glyphicon-user"></span>
                     </span>
-                        <input type="password" name="passe2" class="form-control"required placeholder="Password confirmation" />
+                        <input type="password" name="pass2" class="form-control"required placeholder="Password confirmation" />
                     </div>
                 </div>
                 <div class="form-group">

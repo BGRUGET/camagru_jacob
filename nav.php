@@ -1,9 +1,6 @@
 
-<?php
-require_once ('header.php'); ?>
-
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#"><img src="/img/camabelagruge.png" width="150" height="150" class="d-inline-block align-top" alt="cama(bela)gru(ge)">
+    <a class="navbar-brand" href="/index.php"><img src="/img/camabelagruge.png" width="150" height="150" class="d-inline-block align-top" alt="cama(bela)gru(ge)">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" id="hamburger">
         <span class="navbar-toggler-icon"></span>
@@ -12,23 +9,26 @@ require_once ('header.php'); ?>
         <ul class="navbar-nav ml-auto">
             <?php if (get_user()): ?>
             <li class="nav-item active">
-                <a class="nav-link" href="/indexview.php">HOME <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/index.php">HOME <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/cameraview.php">CAMERA</a>
+                <a class="nav-link" href="/index.php?p=camera">CAMERA</a>
             </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/profil.php">PROFIL</a>
+                    <a class="nav-link" href="/index.php?p=profil">PROFIL</a>
                 </li>
             <li class="nav-item">
-                <a class="nav-link" href="/disconnect.php">DISCONNECT</a>
+                <a class="nav-link" href="/index.php">DISCONNECT</a>
             </li>
             <?php else: ?>
-            <li class="nav-item">
-                <a class="nav-link" href="/signin.php">CONNEXION</a>
+            <li class="nav-item active">
+                <a class="nav-link" href="/index.php">HOME<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/signup.php">SIGN UP</a>
+                <a class="nav-link" href="/index.php?p=signin" >CONNEXION</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/index.php?p=signup">SIGN UP</a>
             </li>
         </ul>
         <?php endif; ?>
@@ -38,11 +38,4 @@ require_once ('header.php'); ?>
         </form>
     </div>
 </nav>
-</body>
-<script> document.getElementById('hamburger').addEventListener('click', () => {
-        const content = document.getElementById('navbarSupportedContent1')
-        const classes = content.className.split(' ')
-        const collapsed = classes
-            .reduce((has, content) => has || content === 'collapse', false)
-        content.className = collapsed ? classes.filter(className => className !== 'collapse').join(' ') : [classes, 'collapse'].join(' ')
-    }) </script>
+<body>

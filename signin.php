@@ -1,54 +1,15 @@
 <?php
-require_once('header.php');
+
+require_once('connexion_user.php');
 if (get_user() == TRUE)
-    header('Location: /cameraview.php');
-?>
-<!doctype html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title>camagru</title>
+    header('Location: /profil.php');
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-</head>
-<body>
-<?php require_once ('database.php');
-include __DIR__ . '/nav.php'; ?>
-<?php
-    if(isset($_POST['login']))
-    {
-        $login= (htmlspecialchars(addslashes($_POST['login'])));
-        $passe1= (htmlspecialchars(addslashes($_POST['passe'])));
-        $log = $database->prepare("SELECT login FROM users WHERE login = ? ");
-        $log->bindValue(1, $login);
-        $log->execute();
-        $new_log= $log->fetch();
-        $invalid_mdp = 0;
-        if ($new_log[0] === $login)
-        {
-            $passe1 = hash('sha256', $passe1);
-            $password = $database->prepare("SELECT password FROM users WHERE login = ? AND password = ? ");
-            $password->bindValue(1, $login);
-            $password->bindValue(2, $passe1);
-            $password->execute();
-            $new_pass = $password->fetch();
-            $mail = $database->prepare("SELECT mail FROM users WHERE login = ?");
-            $mail->bindValue(1, $login);
-            $mail->execute();
-            $new_mail = $mail->fetch();
-            if ($new_pass[0] != $passe1)
-            {
-                $invalid_mdp = 1;
-            }
-            else
-            {
-                $_SESSION['login'] = $login;
-                $_SESSION['mail'] = $new_mail[0];
-                header('Location: /indexview.php');
-            }
 
-        }
-    }
+if(isset($_POST['login'])) {
+
+   User::connexion( $_POST['login'],$_POST['passe']);
+}
+
 ?>
 
 <div class="modal-dialog">
@@ -80,7 +41,7 @@ include __DIR__ . '/nav.php'; ?>
             <button type="submit" class="btn btn-success btn-lg">Login</button>
         </div>
         <div class="input-group">
-                <a class="nav-link" href="/forgetpass.php">forget password</a>
+                <a class="nav-link" href="/index.php?p=forgetpass">forget password</a>
         </div>
 
 

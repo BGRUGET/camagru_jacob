@@ -7,16 +7,16 @@ if (isset($_POST['email'])){
     $mail_link=(htmlspecialchars(addslashes($_POST['email'])));
 
     if((filter_var($mail_link, FILTER_VALIDATE_EMAIL))) {
-        $checkmail = $database->prepare("SELECT mail, login FROM users WHERE mail = ? ");
-        $checkmail->bindValue(1, $mail_link);
-        $checkmail->execute();
-        $info_db = $checkmail->fetch();
-    var_dump($info_db);
+        $check_mail = $database->prepare("SELECT mail, login FROM users WHERE mail = ? ");
+        $check_mail->bindValue(1, $mail_link);
+        $check_mail->execute();
+        $info_db = $check_mail->fetch();
         if ($info_db[0] === $mail_link) {
 
             $cle = md5(microtime(TRUE)*1000000);
-            $change_pass = $database->prepare("UPDATE users SET id_unique = ?");
+            $change_pass = $database->prepare("UPDATE users SET id_unique = ? WHERE mail = ?");
             $change_pass->bindValue(1, $cle);
+            $change_pass->bindValue(2, $mail_link);
             $change_pass->execute();
             $to = $mail_link;
             $login = $info_db[1];
