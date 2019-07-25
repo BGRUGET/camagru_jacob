@@ -1,23 +1,5 @@
 <?php
 
-
-//utiliser docker ps
-//chopper ip du dernier container (mysql)
-//docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <IP CONTAINEUR>
-// ex : mysql:host=172.18.0.2
-
-/*
-try
-{
-    $database = new PDO('mysql:host=mysql;dbname=Camagru;charset=utf8', 'root', 'rootpass',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
-}
-catch (Exception $e)
-{
-    die('Erreur: ' . $e->getMessage());
-}
-*/
-
-
 class myPDO
 {
     private static $database;
@@ -79,5 +61,23 @@ class myPDO
         }
     }
 }
-?>
 
+
+
+
+/*utiliser docker ps
+//chopper ip du dernier container (mysql)
+//docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' <IP CONTAINEUR>
+    // ex : mysql:host=172.18.0.2
+
+
+    try
+    {
+    $database = new PDO('mysql:host=mysql;dbname=Camagru;charset=utf8', 'root', 'rootpass',array(PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION));
+    }
+    catch (Exception $e)
+    {
+    die('Erreur: ' . $e->getMessage());
+    }
+    */
+?>

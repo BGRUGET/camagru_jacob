@@ -1,7 +1,6 @@
 <?php
 
-require_once('connexion_user.php');
-if (get_user() == TRUE)
+if (User::get_user()== TRUE)
     header('Location: /profil.php');
 
 

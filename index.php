@@ -1,6 +1,8 @@
 
 <?php
+    require_once('connexion_user.php');
     require_once ('database.php');
+    require_once('mymail.php');
     myPDO::init_db("Camagru", "mysql", "root", "rootpass");
 
 require_once ('header.php');
@@ -21,6 +23,8 @@ else if ($page == 'camera')
     require_once ('camera.php');
 else if ($page == 'forget')
     require_once ('forgetpass.php');
+else if ($page == 'activateaccount')
+    require_once ('activateaccount.php');
 else if ($page == 'setnewpass')
     require_once ('setnewpassword.php');
 else if ($page == 'profil')
