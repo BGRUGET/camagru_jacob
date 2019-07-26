@@ -2,11 +2,11 @@
   <footer class="footer" style="margin-top: 20px;">
     <div class="content has-text-centered">
       <p>
-        <strong>Camagru</strong> by <a href="https://profile.intra.42.fr/users/rgermain">GERMAIN Remi</a>. The source code is on
-<a href="https://framagit.org/rgermain">framagit</a>. The website made with
-<a href="https://bulma.io/">Bulma</a>.
+        <strong>Camabelagruge</strong> by <a href="https://profile.intra.42.fr/users/begruget">GRUGET Benoit</a>. The source code is on
+<a href="https://github.com/BGRUGET/camagru_jacob">github</a>. The website made with
+<a href="https://getbootstrap.com/">shakeyourBooty by boostrap</a>.
       </p>
-        <a href="../Public/index.php?p=about">About</a> Camagru
+        <a href="/index.php?p=about">About</a> Camabelagruge
       <p>
       </p>
     </div>

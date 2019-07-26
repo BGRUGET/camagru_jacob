@@ -21,7 +21,7 @@ else if ($page == 'signup')
     require_once ('signup.php');
 else if ($page == 'camera')
     require_once ('camera.php');
-else if ($page == 'forget')
+else if ($page == 'forgetpass')
     require_once ('forgetpass.php');
 else if ($page == 'activateaccount')
     require_once ('activateaccount.php');

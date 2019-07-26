@@ -42,7 +42,7 @@ class User
         else {
             $pass = hash('sha256', $pass);
             $token = md5(microtime(TRUE) * 1000000);
-            myPDO::set_data("INSERT INTO users VALUE('',:login, :mail, :pass, :token,'0')", array("login" => $login, "mail" => $mail, "pass" => $pass, "token" => $token));
+            myPDO::set_data("INSERT INTO users VALUE('',:login, :mail, :pass, :token,'')", array("login" => $login, "mail" => $mail, "pass" => $pass, "token" => $token));
             Mymail::link_new_account($login, $mail, $token);
             header('Location: /index.php?p=signin');
         }
@@ -75,11 +75,11 @@ class User
     static public function forget_pass($mail){
 
         $mail = (htmlspecialchars(addslashes($mail)));
-        $check_mail = myPDO::get_data("SELECT login, COUNT(*) FROM users WHERE mail = ?", , true);
+        $check_mail = myPDO::get_data("SELECT login, COUNT(*) FROM users WHERE mail = ?", [$mail] , true);
         if ($check_mail[1] > 0){
             $login = $check_mail[0];
             $token = md5(microtime(TRUE) * 1000000);
-            myPDO::set_data("UPDATE users SET token = :token WHERE mail = :mail",),array("token"=>$token, "mail" =>$mail);
+            myPDO::set_data("UPDATE users SET token = :token WHERE mail = :mail",array("token"=>$token, "mail" =>$mail));
             Mymail::link_new_pass($login, $mail, $token);
             header('Location: /index.php?p=setnewpass');
         }
@@ -96,8 +96,8 @@ class User
         $pass = (htmlspecialchars(addslashes($pass)));
         $pass2 = (htmlspecialchars(addslashes($pass2)));
         $check_newpass = myPDO::get_data("SELECT mail, token FROM users WHERE mail = ?", [$mail], true);
-        if ($pass == $pass2 && $mail == check_newpass[0] && $token == check_newpass[1]) {
-            $passe = hash('sha256', $passe);
+        if ($pass == $pass2 && $mail == $check_newpass[0] && $token == $check_newpass[1]) {
+            $pass = hash('sha256', $pass);
             myPDO::set_data("UPDATE users SET password = :password, token = '' WHERE mail = ?",[$mail]);
             header('Location: /index.php?p=signin');
         }
