@@ -31,7 +31,6 @@ class myPDO
     static public function getdb(){
         if (self::$database === NULL) // si il ny a pas de connection entre la database
         {
-            print("ccojdobhdiobdhjobjdfbdfbdf");
             static::init_db("Camagru", "mysql", "root", "rootpass");
         }
         return (self::$database);

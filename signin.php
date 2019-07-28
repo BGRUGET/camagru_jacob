@@ -6,7 +6,9 @@ if (User::get_user()== TRUE)
 
 if(isset($_POST['login'])) {
 
-   User::connexion( $_POST['login'],$_POST['passe']);
+  $user =  User::connexion( $_POST['login'],$_POST['passe']);
+
+  $user->login()
 }
 
 ?>

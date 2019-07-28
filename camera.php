@@ -2,7 +2,7 @@
 
 echo 'only for connected';
 
-if (get_user() == FALSE)
+if (User::get_user() == FALSE)
     header('Location: /signin.php');
 ?>
 <!doctype html>

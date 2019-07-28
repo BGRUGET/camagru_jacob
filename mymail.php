@@ -5,14 +5,14 @@ class Mymail
 {
     const MAIL_FROM = 'From:noreply@gmail.com' . "\n";
 
-    static public function link_new_account($login, $mail, $token){
+    static public function link_new_account($login, $fname, $lname, $mail, $token){
 
         $subject = 'Check mail Camabelagruge';
-        $message = ' hello '.$login.',
+        $message = ' hello '.$fname.' '.$lname.',
                             Thanks for signing up!
                             Your account has been created, you can login with the following credentials after you have activated your account by pressing the url below.
                             ------------------------
-                            Username: '.$login.'
+                            login: '.$login.'
                             ------------------------
                              
                             Please click this link to activate your account:
@@ -23,15 +23,15 @@ class Mymail
 
     }
 
-    static public function link_new_pass( $login, $mail, $token){
+    static public function link_new_pass( $login, $fname, $lname, $mail, $token){
 
         $subject = 'New mail Camabelagruge';
-        $message = ' hello ' . $login . ',
+        $message = ' hello '.$fname.' '.$lname.' alias '.$login.',
                             you are a bollos !!!!
                             
                          
                             Please click this link to change your password:
-                            http://' . $_SERVER['HTTP_HOST'] . '/index.php?p=setnewpassword&email='.$mail. '&token='.$token.'';
+                            http://' . $_SERVER['HTTP_HOST'] . '/index.php?p=setnewpass&email='.$mail. '&token='.$token.'';
         mail($mail, $subject, $message, self::MAIL_FROM);
 
     }

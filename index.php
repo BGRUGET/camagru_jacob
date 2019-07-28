@@ -1,6 +1,6 @@
 
 <?php
-    require_once('connexion_user.php');
+    require_once('user.php');
     require_once ('database.php');
     require_once('mymail.php');
     myPDO::init_db("Camagru", "mysql", "root", "rootpass");

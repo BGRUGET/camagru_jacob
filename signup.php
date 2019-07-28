@@ -7,7 +7,7 @@ if (User::get_user() == TRUE)
 <?php
     if(isset($_POST['login'])){
 
-        User::register($_POST['login'],$_POST['email'],$_POST['pass'],$_POST['pass2']);
+        User::register($_POST['login'], $_POST['fname'], $_POST['lname'],$_POST['email'],$_POST['pass'],$_POST['pass2']);
         }
 
 ?>
@@ -25,6 +25,22 @@ if (User::get_user() == TRUE)
                     <span class="glyphicon glyphicon-user"></span>
                     </span>
                         <input type="text" name="login" class="form-control" required placeholder="Login" pattern="[A-Za-z]{3,12}" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-user"></span>
+                            </span>
+                        <input type="text" name="fname" class="form-control" required placeholder="First Name" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="input-group">
+                            <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-user"></span>
+                            </span>
+                        <input type="text" name="lname" class="form-control" required placeholder="Last Name" />
                     </div>
                 </div>
                 <div class="form-group">

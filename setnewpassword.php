@@ -3,7 +3,7 @@
 
 if (isset($_POST['pass']) && isset($_POST['pass2'])) {
 
-    User::set_new_pass($_GET['email'], $_GET['token'], $_POST['pass1'], $_POST['pass2']);
+    User::set_new_pass($_GET['email'], $_GET['token'], $_POST['pass'], $_POST['pass2']);
 
 }
 
