@@ -3,8 +3,6 @@
 class User
 {
 
-
-
     static public function connexion($login, $password)
     {
         $login = (htmlspecialchars(addslashes($login)));
@@ -19,6 +17,7 @@ class User
             } else if ($status == 'u') {
 
                 $_SESSION['login'] = $login;
+                $_SESSION['mail'] = $new_log[1];
                 header('Location: /index.php?p=profil');
             } else
                 echo ' veuillez valider votre compte';
@@ -47,19 +46,13 @@ class User
         else {
             $pass = hash('sha256', $pass);
             $token = md5(microtime(TRUE) * 1000000);
-            myPDO::set_data("INSERT INTO users VALUE('',:login, :fname, :lname, '', '', :mail, :pass, '',:token,'')", array("login" => $login, "fname" => $fname,"lname" => $lname, "mail" => $mail, "pass" => $pass, "token" => $token));
+            myPDO::set_data("INSERT INTO users VALUE('',:login, :fname, :lname, '', '', :mail, :password, '',:token,'')", array("login" => $login, "fname" => $fname,"lname" => $lname, "mail" => $mail, "password" => $pass, "token" => $token));
             Mymail::link_new_account($login, $fname, $lname, $mail, $token);
             header('Location: /index.php?p=signin');
         }
     }
 
-    static public function get_profil($data)
-    {
-        $login = $_SESSION['login'];
 
-        $get_data = myPDO::get_data("SELECT " . $data . " FROM users WHERE login = ? ", [$login], true);
-        echo $get_data[0];
-    }
 
     static public function get_user()
     {

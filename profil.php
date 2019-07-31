@@ -1,4 +1,25 @@
 
+<?php
+//if(isset($_POST['login'])) {
+  //  user::set_profil('login');
+//}
+
+
+
+if(isset($_POST['fname'])) {
+    profil::set_profil('fname', $_POST['fname']);
+}
+if(isset($_POST['lname'])) {
+    profil::set_profil('lname', $_POST['lname']);
+}
+if(isset($_POST['phone'])) {
+    profil::set_profil('phone', $_POST['phone']);
+}
+if(isset($_POST['pass']) && isset($_POST['pass2'])) {
+    profil::set_new_pass($_POST['pass'], $_POST['pass2']);
+}
+
+?>
 <div class="container mt-5">
     <div class="row">
         <div class="col-lg-4 pb-5">
@@ -8,10 +29,10 @@
                     <div class="author-card-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams">
                     </div>
                     <div class="author-card-details">
-                        <div class="form-group">
+                    <!--<div class="form-group">
                             <label for="account-fn">login</label>
-                            <input class="form-control" type="text" id="account-log" placeholder="<?php user::get_profil('login')?>" >
-                        </div>
+                            <input class="form-control" type="text" id="account-log" placeholder="<?php //profil::get_profil('login')?>" >
+                        </div> -->
                     <span class="author-card-position">Joined February 06, 2017</span>
                     </div>
                 </div>
@@ -43,42 +64,47 @@
         </div>
         <!-- Profile Settings-->
         <div class="col-lg-8 pb-5">
-            <form class="row">
+            <form class="row" method="post">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="account-log">login</label>
+                        <input class="form-control" type="text" id="account-fn" name="login" placeholder="<?php profil::get_profil('login')?>">
+                    </div>
+                </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-fn">First Name</label>
-                        <input class="form-control" type="text" id="account-fn"  placeholder="<?php user::get_profil('fname')?>">
+                        <input class="form-control" type="text" id="account-fn" name="fname" placeholder="<?php profil::get_profil('fname')?>">
                     </div>
                 </div>
-
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-ln">Last Name</label>
-                        <input class="form-control" type="text" id="account-ln" placeholder="<?php user::get_profil('lname')?>">
+                        <input class="form-control" type="text" id="account-ln" name="lname" placeholder="<?php profil::get_profil('lname')?>">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-email">E-mail Address</label>
-                        <input class="form-control" type="email" id="account-email" placeholder="<?php user::get_profil('mail')?>">
+                        <input class="form-control" type="email" id="account-email"  name="mail" placeholder="<?php profil::get_profil('mail')?>">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-phone">Phone Number</label>
-                        <input class="form-control" type="text" id="account-phone" placeholder="<?php user::get_profil('phone')?>">
+                        <input class="form-control" type="text" id="account-phone" name="phone" placeholder="<?php profil::get_profil('phone')?>">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="pass">New Password</label>
-                        <input class="form-control" type="password" id="account-pass">
+                        <input class="form-control" type="password" id="account-pass" name="pass">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="pass2">Confirm Password</label>
-                        <input class="form-control" type="password" id="account-confirm-pass">
+                        <input class="form-control" type="password" id="account-confirm-pass" name="pass2">
                     </div>
                 </div>
                 <div class="col-12">
@@ -89,7 +115,7 @@
                             <label class="custom-control-label" for="like">like</label>
                             <label class="custom-control-label" for="comment">comment</label>
                         </div>
-                        <button class="btn btn-style-1 btn-primary" type="button" data-toast="" data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
+                        <button class="btn btn-style-1 btn-primary" type="submit" data-toast="" data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
                     </div>
                 </div>
             </form>
