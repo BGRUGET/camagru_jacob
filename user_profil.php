@@ -17,18 +17,11 @@ class Profil
         $login = $_SESSION['login'];
         $form = (htmlspecialchars(addslashes($form)));
         $data = profil::get_profil($column);
-        //   $check_login = myPDO::get_data("SELECT COUNT(*) FROM users WHERE login = ? ", [$login], true);
-        //    $check_mail = myPDO::get_data("SELECT COUNT(*) FROM users WHERE mail = ?", [$mail], true);
-        /*   if ($check_login[0] > 0)
-               echo 'login already use';
-           if ($check_mail[0] > 0)
-               echo 'mail already use';*/
-        var_dump($data);
-        var_dump($form);
-        if ($data != $form /*&& $check_mail[0] < 0 && $check_login[0] < 0*/) {
+
+        if ($data != $form ) {
             $_SESSION[$form] = $form;
-            myPDO::set_data("UPDATE users SET " . $column . "=" . $form . " WHERE login = ? ", [$login]);
-            echo " profil set";
+            myPDO::set_data("UPDATE users SET " . $column . "= :column WHERE login = :login ", array("login" => $login, "column" => $form));
+            echo "profil set";
             header('Location: /index.php?p=profil');
         }
     }

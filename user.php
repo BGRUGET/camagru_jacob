@@ -77,7 +77,7 @@ class User
     static public function forget_pass($mail){
 
         $mail = (htmlspecialchars(addslashes($mail)));
-        $check_mail = myPDO::get_data("SELECT login, fname, lname COUNT(*) FROM users WHERE mail = ?", [$mail] , true);
+        $check_mail = myPDO::get_data("SELECT login, fname, lname, COUNT(*) FROM users WHERE mail = ?", [$mail] , true);
         if ($check_mail[1] > 0){
             $login = $check_mail[0];
             $token = md5(microtime(TRUE) * 1000000);
@@ -85,7 +85,6 @@ class User
             $lname = $check_mail[3];
             myPDO::set_data("UPDATE users SET token = :token WHERE mail = :mail",array("token"=>$token, "mail" =>$mail));
             Mymail::link_new_pass($login, $fname, $lname, $mail, $token);
-            header('Location: /index.php?p=setnewpass');
         }
 
         else

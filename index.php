@@ -13,7 +13,6 @@ if (isset($_GET) && isset($_GET['p']))
     $page = $_GET['p'];
 else
     $page = 'home';
-var_dump($GLOBALS['page']);
 if ($page == 'home')
    echo' home';
 else if ($page == 'signin')

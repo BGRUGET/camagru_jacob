@@ -15,9 +15,9 @@ if(isset($_POST['lname'])) {
 if(isset($_POST['phone'])) {
     profil::set_profil('phone', $_POST['phone']);
 }
-if(isset($_POST['pass']) && isset($_POST['pass2'])) {
+/*if(isset($_POST['pass']) && isset($_POST['pass2'])) {
     profil::set_new_pass($_POST['pass'], $_POST['pass2']);
-}
+}*/
 
 ?>
 <div class="container mt-5">
@@ -115,7 +115,7 @@ if(isset($_POST['pass']) && isset($_POST['pass2'])) {
                             <label class="custom-control-label" for="like">like</label>
                             <label class="custom-control-label" for="comment">comment</label>
                         </div>
-                        <button class="btn btn-style-1 btn-primary" type="submit" data-toast="" data-toast-position="topRight" data-toast-type="success" data-toast-icon="fe-icon-check-circle" data-toast-title="Success!" data-toast-message="Your profile updated successfuly.">Update Profile</button>
+                        <button class="btn btn-style-1 btn-primary" type="submit">Update Profile</button>
                     </div>
                 </div>
             </form>
