@@ -3,37 +3,41 @@
 //if(isset($_POST['login'])) {
   //  user::set_profil('login');
 //}
-
-
-
-if(isset($_POST['fname'])) {
+if(!empty($_POST['fname'])) {
     profil::set_profil('fname', $_POST['fname']);
 }
-if(isset($_POST['lname'])) {
+if(!empty($_POST['login'])){
+    profil::set_profil('login', $_POST['login']);
+}
+if(!empty($_POST['lname'])) {
     profil::set_profil('lname', $_POST['lname']);
 }
-if(isset($_POST['phone'])) {
+if(!empty($_POST['phone'])){
     profil::set_profil('phone', $_POST['phone']);
 }
-/*if(isset($_POST['pass']) && isset($_POST['pass2'])) {
+if(!empty($_POST['pass']) && !empty($_POST['pass2'])) {
     profil::set_new_pass($_POST['pass'], $_POST['pass2']);
-}*/
+}
+profil::set_notif($_POST['check']);
 
 ?>
 <div class="container mt-5">
     <div class="row">
         <div class="col-lg-4 pb-5">
             <!-- Account Sidebar-->
+            <form class="row" method="post">
             <div class="author-card pb-3">
                 <div class="author-card-cover">
-                    <div class="author-card-avatar"><img src="https://bootdey.com/img/Content/avatar/avatar1.png" alt="Daniel Adams">
+                    <div class="author-card-avatar"><img name = "pic" src="<?= profil::get_profil('pic')?>" alt="<?= profil::get_profil('login')?>">
+                        <input type="file" name ="pic">
                     </div>
-                    <div class="author-card-details">
-                    <!--<div class="form-group">
-                            <label for="account-fn">login</label>
-                            <input class="form-control" type="text" id="account-log" placeholder="<?php //profil::get_profil('login')?>" >
-                        </div> -->
-                    <span class="author-card-position">Joined February 06, 2017</span>
+
+                <div class="author-card-details">
+                    <div class="form-group">
+                        <label for="account-fn">login</label>
+                        <input class="form-control" type="text" id="account-log" name="login" placeholder= "login" value ="<?= profil::get_profil('login')?>" >
+                    </div>
+                    <span class="author-card-position">Joined on <?= profil::get_profil('date')?></span>
                     </div>
                 </div>
             </div>
@@ -64,35 +68,29 @@ if(isset($_POST['phone'])) {
         </div>
         <!-- Profile Settings-->
         <div class="col-lg-8 pb-5">
-            <form class="row" method="post">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <label for="account-log">login</label>
-                        <input class="form-control" type="text" id="account-fn" name="login" placeholder="<?php profil::get_profil('login')?>">
-                    </div>
-                </div>
+             <div class = "row">
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-fn">First Name</label>
-                        <input class="form-control" type="text" id="account-fn" name="fname" placeholder="<?php profil::get_profil('fname')?>">
+                        <input class="form-control" type="text" id="account-fn" name="fname" placeholder= "First name" value ="<?= profil::get_profil('fname')?>">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-ln">Last Name</label>
-                        <input class="form-control" type="text" id="account-ln" name="lname" placeholder="<?php profil::get_profil('lname')?>">
+                        <input class="form-control" type="text" id="account-ln" name="lname" placeholder= " Last name" value ="<?= profil::get_profil('lname')?>">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-email">E-mail Address</label>
-                        <input class="form-control" type="email" id="account-email"  name="mail" placeholder="<?php profil::get_profil('mail')?>">
+                        <input class="form-control" type="email" id="account-email"  name="mail" placeholder= "Mail" value ="<?= profil::get_profil('mail')?>">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="account-phone">Phone Number</label>
-                        <input class="form-control" type="text" id="account-phone" name="phone" placeholder="<?php profil::get_profil('phone')?>">
+                        <input class="form-control" type="text" id="account-phone" name="phone" placeholder= "phone" value ="<?= profil::get_profil('phone')?>">
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -110,14 +108,14 @@ if(isset($_POST['phone'])) {
                 <div class="col-12">
                     <hr class="mt-2 mb-3">
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
-                        <div class="custom-control custom-checkbox d-block">
-                            <input class="custom-control-input" type="checkbox" id="subscribe_me" checked="">
-                            <label class="custom-control-label" for="like">like</label>
-                            <label class="custom-control-label" for="comment">comment</label>
+                        <div class="form-group form-check">
+                            <input type="checkbox"  <?= profil::get_profil('notif')?> name ="check" class="form-check-input" id="exampleCheck1" value="notif"/>notif<br>
                         </div>
+
                         <button class="btn btn-style-1 btn-primary" type="submit">Update Profile</button>
                     </div>
                 </div>
+             </div>
             </form>
         </div>
     </div>

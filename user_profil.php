@@ -8,7 +8,12 @@ class Profil
         $login = $_SESSION['login'];
 
         $get_data = myPDO::get_data("SELECT " . $form . " FROM users WHERE login = ? ", [$login], true);
-        echo $get_data[0];
+        if ($form == 'notif') {
+            if ($get_data[0] != '1')
+                return;
+            else
+                return 'checked';
+        }
         return $get_data[0];
     }
 
@@ -17,9 +22,15 @@ class Profil
         $login = $_SESSION['login'];
         $form = (htmlspecialchars(addslashes($form)));
         $data = profil::get_profil($column);
-
-        if ($data != $form ) {
-            $_SESSION[$form] = $form;
+        if ($data != $form) {
+            if ($column == 'login') {
+                $check_login = myPDO::get_data("SELECT COUNT(*) FROM users WHERE login = ? ", [$form], true);
+                if ($check_login[0] > 0) {
+                    echo 'login already use';
+                    die();
+                }
+            }
+            $_SESSION[$column] = $form;
             myPDO::set_data("UPDATE users SET " . $column . "= :column WHERE login = :login ", array("login" => $login, "column" => $form));
             echo "profil set";
             header('Location: /index.php?p=profil');
@@ -32,27 +43,24 @@ class Profil
         $pass = (htmlspecialchars(addslashes($pass)));
         $pass2 = (htmlspecialchars(addslashes($pass2)));
         $login = $_SESSION['login'];
-        $check_newpass = profil::get_profil($pass);
+        $check_newpass = profil::get_profil('password');
+
         if ($pass == $pass2) {
             $pass = hash('sha256', $pass);
-            if ($pass != $check_newpass[0])
-                myPDO::set_data("UPDATE users SET password = :pass, WHERE login = ?", array("login" => $login, "pass" => $pass));
-        }
-    }
-
-    static public function set_login($form)
-    {
-        $login = $_SESSION['login'];
-        $form = (htmlspecialchars(addslashes($form)));
-
-        if ($form != $login) {
-            $check_login = myPDO::get_data("SELECT COUNT(*) FROM users WHERE login = ? ", [$form], true);
-            if ($check_login[0] < 0) {
-                myPDO::set_data("UPDATE users SET " . $login . "=" . $form . " WHERE login = ? ", [$login]);
-                $_SESSION['login'] = $form;
-            }
+            if ($pass !== $check_newpass)
+                myPDO::set_data("UPDATE users SET password = :pass WHERE login = :login", array("login" => $login, "pass" => $pass));
             else
-                echo 'login already use';
+                echo 'same mdp';
         }
     }
+
+
+    static public function set_notif($check)
+     {
+         $login = $_SESSION['login'];
+         if ($check != 'NULL')
+             $check ='1';
+          myPDO::set_data("UPDATE users SET notif = :notif WHERE login = :login", array("login" => $login, "notif" => $check));
+     }
 }
+

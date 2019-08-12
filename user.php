@@ -14,7 +14,7 @@ class User
 
             if ($new_log[2] != $passe1) {
                 echo 'mauvais pass';
-            } else if ($status == 'u') {
+            } else if ($status == 'u' || $status == 'comment' || $status == 'like' || $status == 'like comment') {
 
                 $_SESSION['login'] = $login;
                 $_SESSION['mail'] = $new_log[1];
@@ -46,7 +46,7 @@ class User
         else {
             $pass = hash('sha256', $pass);
             $token = md5(microtime(TRUE) * 1000000);
-            myPDO::set_data("INSERT INTO users VALUE('',:login, :fname, :lname, '', '', :mail, :password, '',:token,'')", array("login" => $login, "fname" => $fname,"lname" => $lname, "mail" => $mail, "password" => $pass, "token" => $token));
+            myPDO::set_data("INSERT INTO users VALUE('',:login, :fname, :lname, '', '', :mail, :password, NOW(), :token,'','')", array("login" => $login, "fname" => $fname,"lname" => $lname, "mail" => $mail, "password" => $pass, "token" => $token));
             Mymail::link_new_account($login, $fname, $lname, $mail, $token);
             header('Location: /index.php?p=signin');
         }
