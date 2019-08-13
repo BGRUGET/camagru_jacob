@@ -3,23 +3,30 @@
 //if(isset($_POST['login'])) {
   //  user::set_profil('login');
 //}
-if(!empty($_POST['fname'])) {
-    profil::set_profil('fname', $_POST['fname']);
+if(isset($_POST)) {
+    if (!empty($_POST['fname'])) {
+        profil::set_profil('fname', $_POST['fname']);
+    }
+    if (!empty($_POST['login'])) {
+        profil::set_profil('login', $_POST['login']);
+    }
+    if (!empty($_POST['lname'])) {
+        profil::set_profil('lname', $_POST['lname']);
+    }
+    if (!empty($_POST['phone'])) {
+        profil::set_profil('phone', $_POST['phone']);
+    }
+    if (!empty($_POST['pass']) && !empty($_POST['pass2'])) {
+        profil::set_new_pass($_POST['pass'], $_POST['pass2']);
+    }
+    if (isset($_POST['check']) && !empty($_POST['check'])) {
+        profil::set_notif($_POST['check']);
+    } else
+        profil::set_notif(NULL);
+    if (isset($_POST['pic']) && !empty($_POST['pic'])) {
+        profil::set_pic($_POST['pic']);
+    }
 }
-if(!empty($_POST['login'])){
-    profil::set_profil('login', $_POST['login']);
-}
-if(!empty($_POST['lname'])) {
-    profil::set_profil('lname', $_POST['lname']);
-}
-if(!empty($_POST['phone'])){
-    profil::set_profil('phone', $_POST['phone']);
-}
-if(!empty($_POST['pass']) && !empty($_POST['pass2'])) {
-    profil::set_new_pass($_POST['pass'], $_POST['pass2']);
-}
-profil::set_notif($_POST['check']);
-
 ?>
 <div class="container mt-5">
     <div class="row">
@@ -109,7 +116,7 @@ profil::set_notif($_POST['check']);
                     <hr class="mt-2 mb-3">
                     <div class="d-flex flex-wrap justify-content-between align-items-center">
                         <div class="form-group form-check">
-                            <input type="checkbox"  <?= profil::get_profil('notif')?> name ="check" class="form-check-input" id="exampleCheck1" value="notif"/>notif<br>
+                            <input type="checkbox"  <?= profil::get_profil('notif')?> name ="check" class="form-check-input"  value="notif"/>notif<br>
                         </div>
 
                         <button class="btn btn-style-1 btn-primary" type="submit">Update Profile</button>

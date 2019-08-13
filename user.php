@@ -46,7 +46,7 @@ class User
         else {
             $pass = hash('sha256', $pass);
             $token = md5(microtime(TRUE) * 1000000);
-            myPDO::set_data("INSERT INTO users VALUE('',:login, :fname, :lname, '', '', :mail, :password, NOW(), :token,'','')", array("login" => $login, "fname" => $fname,"lname" => $lname, "mail" => $mail, "password" => $pass, "token" => $token));
+            myPDO::set_data("INSERT INTO users VALUE('',:login, :fname, :lname, '', default , :mail, :password, NOW(), :token,'','')", array("login" => $login, "fname" => $fname,"lname" => $lname, "mail" => $mail, "password" => $pass, "token" => $token));
             Mymail::link_new_account($login, $fname, $lname, $mail, $token);
             header('Location: /index.php?p=signin');
         }
