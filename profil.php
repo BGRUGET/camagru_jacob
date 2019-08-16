@@ -21,10 +21,11 @@ if(isset($_POST)) {
     }
     if (isset($_POST['check']) && !empty($_POST['check'])) {
         profil::set_notif($_POST['check']);
-    } else
+    } else {
         profil::set_notif(NULL);
-    if (isset($_POST['pic']) && !empty($_POST['pic'])) {
-        profil::set_pic($_POST['pic']);
+    }
+    if(isset($_FILES) && isset($_FILES['pic']) && !empty($_FILES['pic'])) {
+        profil::dl_pic($_FILES['pic']);
     }
 }
 ?>
@@ -32,10 +33,10 @@ if(isset($_POST)) {
     <div class="row">
         <div class="col-lg-4 pb-5">
             <!-- Account Sidebar-->
-            <form class="row" method="post">
+            <form class="row" method="post" enctype="multipart/form-data">
             <div class="author-card pb-3">
                 <div class="author-card-cover">
-                    <div class="author-card-avatar"><img name = "pic" src="<?= profil::get_profil('pic')?>" alt="<?= profil::get_profil('login')?>">
+                    <div class="author-card-avatar"><img name = "picture" src="<?= profil::get_profil('pic')?>" alt="<?= profil::get_profil('login')?>">
                         <input type="file" name ="pic">
                     </div>
 
