@@ -36,7 +36,7 @@ if(isset($_POST)) {
             <form class="row" method="post" enctype="multipart/form-data">
             <div class="author-card pb-3">
                 <div class="author-card-cover">
-                    <div class="author-card-avatar"><img name = "picture" src="<?= profil::get_profil('pic')?>" alt="<?= profil::get_profil('login')?>">
+                    <div class="author-card-avatar"><img name = "pic" src="<?= profil::get_profil('pic')?>" alt="<?= profil::get_profil('login')?>" height= "250" width="250" ">
                         <input type="file" name ="pic">
                     </div>
 

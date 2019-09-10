@@ -15,7 +15,7 @@
                 <a class="nav-link" href="/index.php?p=camera">CAMERA</a>
             </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/index.php?p=profil">PROFIL</a>
+                    <a class="nav-link" href="/index.php?p=profil"><img name = "pic" src="<?= profil::get_profil('pic')?>" alt="<?= profil::get_profil('login')?>" height= "40" width="40"  class="rounded-circle"</a>
                 </li>
             <li class="nav-item">
                 <a class="nav-link" href="/disconnect.php">DISCONNECT</a>
@@ -32,10 +32,6 @@
             </li>
         </ul>
         <?php endif; ?>
-        <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-        </form>
     </div>
 </nav>
 <body>
