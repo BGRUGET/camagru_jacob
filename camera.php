@@ -8,16 +8,16 @@ if (User::get_user() == FALSE)
 <link rel="stylesheet" href="css/test.css">
 
 <div class="d-flex p-2 bd-highlight">
-    <div class="booth">
+    <div class="booth" style="position:relative;">
 
-        <video id="video" width ="320"  height = "" autoplay ></video>
+        <video id="video" width ="320"  height="" autoplay ></video>
         <button id="startbutton">Prendre une photo</button>
-
+    <canvas id="preview" width="320" height="240" style="z-index:5; position: absolute;top:0;left:0;border: 2px solid red;"></canvas>
     </div>
-    <div>
-        <img src="/img/pics/banane.jpg" alt="heart" height= "100" width="100">
-        <img src="/img/pics/ap.png" alt="hat" height= "100" width="100">
-        <img src="/img/pics/zombie.png" alt="zombie" height= "100" width="100">
+    <div class="d-flex flex-column bd-highlight mb-3">
+       <button id ="mst"> <img src="/img/pics/mstch.png" alt="mstch" height= "100" width="100"></button>
+        <img src="/img/pics/hat.png" alt="hat" height= "100" width="100">
+        <img src="/img/pics/heart.png" alt="heart" height= "100" width="100" >
     </div>
 </div>
 <!--Carousel Wrapper-->

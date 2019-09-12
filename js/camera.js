@@ -5,8 +5,10 @@
         can       = document.querySelector('#can'),
         canvas       = document.querySelector('#canvas'),
         startbutton  = document.querySelector('#startbutton'),
+        preview = document.querySelector('#preview'),
+        prevctx = preview.getContext('2d')
         width = 320,
-        height = 0;
+        height = 320;
 
     navigator.getMedia = (navigator.getUserMedia ||
         navigator.webkitGetUserMedia ||
@@ -35,12 +37,16 @@
 
    video.addEventListener('canplay', function(ev){
         if (!streaming) {
-            height = video.videoHeight / (video.videoWidth/width);
+            let height = video.videoHeight / (video.videoWidth / width);
             video.setAttribute('width', width);
             video.setAttribute('height', height);
             canvas.setAttribute('width', width);
             canvas.setAttribute('height', height);
             streaming = true;
+            prevctx.width = video.width + 'px';
+            prevctx.height = video.height + 'px';
+            prevctx.fillStyle = 'rgba(0,0,0,0.4)';
+            prevctx.strokeStyle = 'rgba(0,153,255,0.4)';
         }
     }, false);
 
@@ -49,6 +55,7 @@
         canvas.height = height;
         canvas.getContext('2d').drawImage(video, 0, 0, width, height);
         var data = canvas.toDataURL('image/png');
+        console.log(data);
         var image = document.createElement("img");
         image.setAttribute('src', data);
         adddiv(image);
@@ -69,5 +76,6 @@
         takepicture();
         ev.preventDefault();
     }, false);
+
 
 })();
