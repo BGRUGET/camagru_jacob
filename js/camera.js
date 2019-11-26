@@ -1,4 +1,4 @@
-(function() {
+/*(function() {
 
     var streaming = false,
         video        = document.querySelector('#video'),
@@ -7,7 +7,7 @@
         startbutton  = document.querySelector('#startbutton'),
         preview = document.querySelector('#preview'),
         prevctx = preview.getContext('2d')
-        width = 320,
+    width = 320,
         height = 320;
 
     navigator.getMedia = (navigator.getUserMedia ||
@@ -35,7 +35,7 @@
         }
     );
 
-   video.addEventListener('canplay', function(ev){
+    video.addEventListener('canplay', function(ev){
         if (!streaming) {
             let height = video.videoHeight / (video.videoWidth / width);
             video.setAttribute('width', width);
@@ -62,8 +62,8 @@
 
     }
     function adddiv(image){
-       var div1 = document.createElement("div");
-       div1.classList = "col-md-3 mb-3";
+        var div1 = document.createElement("div");
+        div1.classList = "col-md-3 mb-3";
         var div2 = document.createElement("div");
         div2.classList ="card";
 
@@ -78,4 +78,4 @@
     }, false);
 
 
-})();
+})();*/

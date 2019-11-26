@@ -1,0 +1,145 @@
+.lyon {
+  max-width : 40%;
+  height: auto;
+  display: block;
+}
+#container {
+	margin: 0px auto;
+	width: 500px;
+	height: 375px;
+	border: 10px #333 solid;
+}
+#videoElement {
+	width: 480px;
+	height: 355px;
+	background-color: #666;
+}
+
+.booth {
+  margin-left: 12%;
+  width: 400px;
+  background-color: #ccc;
+  border: 10px solid #ddd;
+
+}
+
+.booth-capture-button {
+  display: block;
+  margin: 10px 0;
+  padding: 10px 20px;
+  background-color: cornflowerblue;
+  color: #fff;
+  text-align: center;
+  text-decoration: none;
+}
+
+.picture {
+  flex-direction: row;
+  display: flex;
+  margin-left: 0px;
+}
+
+.fruit
+{
+  margin: 5;
+  height: 10vw;
+}
+
+.column {
+  margin-left: 13%;
+  height: auto;
+  width: 10vw;
+  display: flex;
+  flex-direction: column;
+}
+
+.invisible1 {
+  position: absolute;
+  width: 250px;
+  display: none;
+}
+
+
+body {
+
+  overflow-x: hidden;
+}
+
+#deleteimg
+{
+    display: block;
+}
+
+#Like{
+  width: 100px;
+  margin-left: 200px;
+}
+
+body{margin-top:20px;}
+
+
+.comment-wrapper .panel-body {
+    max-height:650px;
+    overflow:auto;
+}
+
+.comment-wrapper .media-list .media img {
+    width:64px;
+    height:64px;
+    border:2px solid #e5e7e8;
+}
+
+.comment-wrapper .media-list .media {
+    border-bottom:1px dashed #efefef;
+    margin-bottom:25px;
+}
+
+.shadow-textarea textarea.form-control::placeholder {
+    font-weight: 300;
+}
+.shadow-textarea textarea.form-control {
+    padding-left: 0.8rem;
+}
+
+.form-control {
+	width: 30%;
+}
+
+#printpas
+{
+  display: none;
+  color: blue;
+}
+
+#custom-button {
+  padding: 10px;
+  color: white;
+  background-color: #009578;
+  border: 1px solid #000;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#custom-button:hover {
+  background-color: #00b28f;
+}
+
+#custom-text {
+  margin-left: 10px;
+  font-family: sans-serif;
+  color: #aaa;
+}
+
+#myImg
+{
+  display: none;
+}
+
+.super_miniature {
+    display: flex;
+    flex-direction: column;
+    margin-left: 150px;
+    max-height: 750px;
+    overflow-y: hidden;
+    overflow-y: scroll;
+}

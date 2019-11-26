@@ -1,22 +1,20 @@
-<?php
-
+<?php/*
 echo 'only for connected';
-
 if (User::get_user() == FALSE)
     header('Location: /signin.php');
 ?>
-<link rel="stylesheet" href="css/test.css">
+<--<link rel="stylesheet" href="css/test.css">
 
 <div class="d-flex p-2 bd-highlight">
     <div class="booth" style="position:relative;">
 
         <video id="video" width ="320"  height="" autoplay ></video>
         <button id="startbutton">Prendre une photo</button>
-    <canvas id="preview" width="320" height="240" style="z-index:5; position: absolute;top:0;left:0;border: 2px solid red;"></canvas>
+        <canvas id="preview" width="320" height="240" style="z-index:5; position: absolute;top:0;left:0;border: 2px solid red;"></canvas>
     </div>
     <div class="d-flex flex-column bd-highlight mb-3">
-       <button id ="mst"> <img src="/img/pics/mstch.png" alt="mstch" height= "100" width="100"></button>
-        <img src="/img/pics/hat.png" alt="hat" height= "100" width="100">
+        <button id ="chichi"> <img src="/img/pics/chichi.png" alt="chichich" height= "100" width="100"></button>
+        <img src="/img/pics/robin.png" alt="robin" height= "100" width="100">
         <img src="/img/pics/heart.png" alt="heart" height= "100" width="100" >
     </div>
 </div>
@@ -49,6 +47,4 @@ if (User::get_user() == FALSE)
 <canvas id="canvas" style ="display:none;"></canvas>
 
 <script src="js/camera.js"></script>
-
-
 

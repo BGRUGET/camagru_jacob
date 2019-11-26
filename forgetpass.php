@@ -1,5 +1,6 @@
 <?php
-
+if (empty($_GET))
+    header('Location: /index.php?p=forgetpass');
 if (isset($_POST['email'])) {
     if((filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)))
         User::forget_pass($_POST['email']);

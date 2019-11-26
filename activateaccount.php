@@ -1,5 +1,6 @@
 <?php
 
+
 user::validate_new_account($_GET['email'], $_GET['token']);
 
 /*$checkmail = $database->prepare("SELECT mail FROM users WHERE mail = ? ");

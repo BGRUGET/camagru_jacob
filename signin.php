@@ -1,5 +1,6 @@
 <?php
-
+if (empty($_GET))
+header('Location: /index.php?p=signin');
 if (User::get_user()== TRUE)
     header('Location: /profil.php');
 
@@ -49,5 +50,3 @@ User::connexion( $_POST['login'],$_POST['passe']);
     </div>
 </div>
 </div>
-</body>
-</html>

@@ -1,11 +1,17 @@
 
 <?php
 
+if (empty($_GET))
+    header('Location: /index.php?p=signup');
+
 if (User::get_user() == TRUE)
     header('Location: /index.php?p=profil');
 ?>
 <?php
+
     if(isset($_POST['login'])){
+       // if (! preg_match( '/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,16}/', $_POST['pass']))
+
 
         User::register($_POST['login'], $_POST['fname'], $_POST['lname'],$_POST['email'],$_POST['pass'],$_POST['pass2']);
         }

@@ -23,7 +23,7 @@ class Mymail
 
     }
 
-    static public function link_new_pass( $login, $fname, $lname, $mail, $token){
+    static public function link_new_pass($login, $fname, $lname, $mail, $token){
 
         $subject = 'New mail Camabelagruge';
         $message = ' hello '.$fname.' '.$lname.' alias '.$login.',
@@ -32,6 +32,15 @@ class Mymail
                          
                             Please click this link to change your password:
                             http://' . $_SERVER['HTTP_HOST'] . '/index.php?p=setnewpass&email='.$mail. '&token='.$token.'';
+        mail($mail, $subject, $message, self::MAIL_FROM);
+
+    }
+    static public function mail_comment($login, $mail, $perso, $comment, $heure, $mois){
+
+        $subject = 'New mail Camabelagruge';
+        $message = ' hello '.$login.',
+                            '.$perso.' let you this comment : '.$comment .
+                                'at'.$heure .'on'. $mois ;
         mail($mail, $subject, $message, self::MAIL_FROM);
 
     }

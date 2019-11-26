@@ -2,7 +2,6 @@
 
 class User
 {
-
     static public function connexion($login, $password)
     {
         $login = (htmlspecialchars(addslashes($login)));
@@ -34,6 +33,7 @@ class User
         $pass2 = (htmlspecialchars(addslashes($pass2)));
         $fname =(htmlspecialchars(addslashes($fname)));
         $lname = (htmlspecialchars(addslashes($lname)));
+        $key_user = md5(microtime(TRUE)*100000);
 
         $check_login = myPDO::get_data("SELECT COUNT(*) FROM users WHERE login = ? ", [$login], true);
         $check_mail = myPDO::get_data("SELECT COUNT(*) FROM users WHERE mail = ?", [$mail], true);
@@ -41,12 +41,14 @@ class User
             echo 'login already use';
         else if ($check_mail[0] > 0)
             echo 'mail already use';
-        else if ($pass != $pass2)
+        else if (!preg_match( '/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,16}/', $pass))
+            echo 'mdp doit contenir au moins 1 maj && 1 min && 1 chiffre && entre 8 et 16 char ';
+        else if($pass != $pass2)
             echo 'mdp2 != mdp1';
         else {
             $pass = hash('sha256', $pass);
             $token = md5(microtime(TRUE) * 1000000);
-            myPDO::set_data("INSERT INTO users VALUE('',:login, :fname, :lname, '', default , :mail, :password, NOW(), :token,'','')", array("login" => $login, "fname" => $fname,"lname" => $lname, "mail" => $mail, "password" => $pass, "token" => $token));
+            myPDO::set_data("INSERT INTO users VALUE('',:login, :fname, :lname, '', default , :mail, :password, NOW(), :token,'','',:key_user)", array("login" => $login, "fname" => $fname,"lname" => $lname, "mail" => $mail, "password" => $pass, "token" => $token, "key_user" => $key_user));
             Mymail::link_new_account($login, $fname, $lname, $mail, $token);
             header('Location: /index.php?p=signin');
         }
@@ -78,15 +80,16 @@ class User
 
         $mail = (htmlspecialchars(addslashes($mail)));
         $check_mail = myPDO::get_data("SELECT login, fname, lname, COUNT(*) FROM users WHERE mail = ?", [$mail] , true);
-        if ($check_mail[1] > 0){
+        var_dump($check_mail[0]);
+        if ($check_mail[0]){
             $login = $check_mail[0];
             $token = md5(microtime(TRUE) * 1000000);
-            $fname = $check_mail[2];
-            $lname = $check_mail[3];
+            $fname = $check_mail[1];
+            $lname = $check_mail[2];
             myPDO::set_data("UPDATE users SET token = :token WHERE mail = :mail",array("token"=>$token, "mail" =>$mail));
             Mymail::link_new_pass($login, $fname, $lname, $mail, $token);
+            header('Location: /index.php?p=signin');
         }
-
         else
             echo 'wrong mail' ;
 

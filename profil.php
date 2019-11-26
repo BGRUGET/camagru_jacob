@@ -1,8 +1,7 @@
 
 <?php
-//if(isset($_POST['login'])) {
-  //  user::set_profil('login');
-//}
+if (empty($_GET))
+    header('Location: /index.php?p=profil');
 if(isset($_POST)) {
     if (!empty($_POST['fname'])) {
         profil::set_profil('fname', $_POST['fname']);
@@ -16,7 +15,10 @@ if(isset($_POST)) {
     if (!empty($_POST['phone'])) {
         profil::set_profil('phone', $_POST['phone']);
     }
-    if (!empty($_POST['pass']) && !empty($_POST['pass2'])) {
+    if (!empty($_POST['pass'])) {
+        if (!preg_match( '/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,16}/', $_POST['pass'])) {
+            echo 'mdp doit contenir au moins 1 maj && 1 min && 1 chiffre && entre 8 et 16 char ';}
+        else if (!empty($_POST['pass2']))
         profil::set_new_pass($_POST['pass'], $_POST['pass2']);
     }
     if (isset($_POST['check']) && !empty($_POST['check'])) {
@@ -24,7 +26,8 @@ if(isset($_POST)) {
     } else {
         profil::set_notif(NULL);
     }
-    if(isset($_FILES) && isset($_FILES['pic']) && !empty($_FILES['pic'])) {
+
+    if (isset($_FILES) && isset($_FILES['pic']) && !empty($_FILES['pic']) && $_FILES['pic']['name'] ){
         profil::dl_pic($_FILES['pic']);
     }
 }
@@ -36,7 +39,8 @@ if(isset($_POST)) {
             <form class="row" method="post" enctype="multipart/form-data">
             <div class="author-card pb-3">
                 <div class="author-card-cover">
-                    <div class="author-card-avatar"><img name = "pic" src="<?= profil::get_profil('pic')?>" alt="<?= profil::get_profil('login')?>" height= "250" width="250" ">
+                    <div class="author-card-avatar">
+                        <img name = "pic" src="<?= profil::get_profil('pic')?>" alt="<?= profil::get_profil('login')?>" height= "250" width="250" ">
                         <input type="file" name ="pic">
                     </div>
 
@@ -51,7 +55,7 @@ if(isset($_POST)) {
             </div>
             <div class="wizard">
                 <nav class="list-group list-group-flush">
-                    <a class="list-group-item" href="/index.php?p=myphoto">
+                    <a class="list-group-item" href="/index.php?p=portfolio">
                         <div class="d-flex justify-content-between align-items-center">
                             <div><i class="fe-icon-heart mr-1 text-muted"></i>
                                 <div class="d-inline-block font-weight-medium text-uppercase">My Photo</div>
