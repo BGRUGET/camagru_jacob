@@ -27,7 +27,6 @@ $reponse = $database->query("SELECT id_unique, content FROM pictures ORDER BY id
 
 ?>
 
-    <script src="galerie.js"> </script>
 
 <?php
 

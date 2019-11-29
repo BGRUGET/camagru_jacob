@@ -1,11 +1,11 @@
-
 <?php
     require_once('user.php');
 require_once('user_profil.php');
-require_once ('database.php');
+require_once ('config/setup.php');
+
     require_once('mymail.php');
     require_once('studio.php');
-    myPDO::init_db("Camagru", "mysql", "root", "rootpass");
+
 
 require_once ('header.php');
 require_once ('nav.php');

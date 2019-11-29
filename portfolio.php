@@ -10,9 +10,10 @@ $database = myPDO::getdb();
 ?>
 <?php
 
-$id = studio::affpic();?>
+$id = studio::affpic();
 
 
+?>
         <script src="js/delete.js"></script>
  <?php
     foreach ($id as $photo): ?>
@@ -22,8 +23,10 @@ $id = studio::affpic();?>
             </div>
           </div>
         <?php
+
     endforeach;
           if (isset($_POST['data'])) {
+
              studio::delpic($_POST['data']);
           }
         ?>

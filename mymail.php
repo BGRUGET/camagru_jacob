@@ -19,7 +19,7 @@ class Mymail
                             http://'.$_SERVER['HTTP_HOST'].'/index.php?p=activateaccount&email='.$mail.'&token='.$token.'';
 
         $testmail = mail($mail, $subject, $message, self::MAIL_FROM);
-        var_dump($testmail);
+
 
     }
 
@@ -35,12 +35,13 @@ class Mymail
         mail($mail, $subject, $message, self::MAIL_FROM);
 
     }
-    static public function mail_comment($login, $mail, $perso, $comment, $heure, $mois){
+    static public function mail_comment($login, $mail, $perso, $comment, $mois, $heure){
 
         $subject = 'New mail Camabelagruge';
         $message = ' hello '.$login.',
                             '.$perso.' let you this comment : '.$comment .
-                                'at'.$heure .'on'. $mois ;
+
+            'at'.$heure .'on'. $mois ;
         mail($mail, $subject, $message, self::MAIL_FROM);
 
     }

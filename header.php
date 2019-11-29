@@ -1,8 +1,8 @@
 <?php
 session_start();
 ?>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
 <link rel="stylesheet" href="/includes/bootstrap.css">
+
 <link rel="stylesheet" href="/index.css">
 <!doctype html>
 <html>

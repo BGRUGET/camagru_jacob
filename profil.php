@@ -1,13 +1,18 @@
 
 <?php
+if (User::get_user() == FALSE)
+    header('Location: /signin.php');
 if (empty($_GET))
     header('Location: /index.php?p=profil');
-if(isset($_POST)) {
+if(!empty($_POST)) {
     if (!empty($_POST['fname'])) {
         profil::set_profil('fname', $_POST['fname']);
     }
     if (!empty($_POST['login'])) {
         profil::set_profil('login', $_POST['login']);
+    }
+    if (!empty($_POST['mail'])) {
+        profil::set_profil('mail', $_POST['mail']);
     }
     if (!empty($_POST['lname'])) {
         profil::set_profil('lname', $_POST['lname']);
@@ -21,9 +26,11 @@ if(isset($_POST)) {
         else if (!empty($_POST['pass2']))
         profil::set_new_pass($_POST['pass'], $_POST['pass2']);
     }
-    if (isset($_POST['check']) && !empty($_POST['check'])) {
+    $test = profil::get_profil('notif');
+
+    if (!empty($_POST['check'])) {
         profil::set_notif($_POST['check']);
-    } else {
+    } elseif( $test == 'checked'){
         profil::set_notif(NULL);
     }
 

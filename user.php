@@ -80,7 +80,6 @@ class User
 
         $mail = (htmlspecialchars(addslashes($mail)));
         $check_mail = myPDO::get_data("SELECT login, fname, lname, COUNT(*) FROM users WHERE mail = ?", [$mail] , true);
-        var_dump($check_mail[0]);
         if ($check_mail[0]){
             $login = $check_mail[0];
             $token = md5(microtime(TRUE) * 1000000);
@@ -97,6 +96,10 @@ class User
 
     static public function set_new_pass($mail, $token, $pass, $pass2 ){
 
+        if (!preg_match( '/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9]).{8,16}/', $pass)) {
+            echo 'mdp doit contenir au moins 1 maj && 1 min && 1 chiffre && entre 8 et 16 char ';
+            header('Location: /index.php?p=setnewpass');
+        }
         $mail = (htmlspecialchars(addslashes($mail)));
         $token = (htmlspecialchars(addslashes($token)));
         $pass = (htmlspecialchars(addslashes($pass)));

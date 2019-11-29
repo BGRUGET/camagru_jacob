@@ -5,7 +5,7 @@ function banane() {
     superr.value = 'banane.png';
 
     img_invi.setAttribute('src', 'banane.png');
-    img_invi.style.display='block';
+    img_invi.style.display='block' ;
 }
 
 function fraise() {

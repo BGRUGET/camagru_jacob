@@ -29,10 +29,17 @@ class Profil
                     die();
                 }
             }
-            $_SESSION[$column] = $form;
-            myPDO::set_data("UPDATE users SET " . $column . "= :column WHERE login = :login ", array("login" => $login, "column" => $form));
-            echo "profil set";
-            header('Location: /index.php?p=profil');
+                if ($column == 'mail') {
+                    $check_mail = myPDO::get_data("SELECT COUNT(*) FROM users WHERE mail = ? ", [$form], true);
+                    if ($check_mail[0] > 0) {
+                        echo 'mail already use';
+                        die();
+                    }
+                }
+                $_SESSION[$column] = $form;
+                myPDO::set_data("UPDATE users SET " . $column . "= :column WHERE login = :login ", array("login" => $login, "column" => $form));
+                echo "profil set";
+                header('Location: /index.php?p=profil');
         }
     }
 
@@ -56,8 +63,10 @@ class Profil
 
     static public function set_notif($check)
     {
+        $check = (htmlspecialchars(addslashes($check)));
         $login = $_SESSION['login'];
-        if (isset($check) && !empty($check))
+
+       if (!empty($check))
             $check = '1';
         else
             $check = '0';

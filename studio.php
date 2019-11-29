@@ -13,8 +13,9 @@ class studio
         $login = $_SESSION['login'];
         $key_user = myPDO:: get_data("SELECT key_user FROM users where login = :login", array('login' => $login), true);
         $_SESSION['key_user'] = $key_user;
-        imagecopy($test_original, $test_filtre, 0, 0, 0, 0, getimagesize('/var/www/html/' . $src)[0], getimagesize('/var/www/html/' . $src)[1]);
+        imagecopy($test_original, $test_filtre, 0, 0, 0, 0, getimagesize('/var/www/html/' . $src)[0] , getimagesize('/var/www/html/' . $src)[1] );
         imagejpeg($test_original, '/var/www/html/final/' . $name . '.jpeg');
+        header('Location: index.php?p=studio');
         myPDO:: set_data("INSERT INTO pictures VALUE ('', :content, :key_user, :valid, '', :id_unique, :login)", array('content' => 'final/' . $name . '.jpeg', 'key_user' => $key_user[0], 'valid' => '1', 'id_unique' =>$cle, 'login' => $user));
     }
 
